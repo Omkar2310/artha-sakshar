@@ -1,6 +1,6 @@
-export interface Transaction {
-    date:               string,
-    type:               'Income' | 'Expense',
-    description:        string,
-    amount:             number
+export interface TransactionModel {
+    date: string,
+    type: string,
+    description: string,
+    amount: number
 }
