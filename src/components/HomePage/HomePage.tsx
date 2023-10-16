@@ -15,7 +15,7 @@ export default function HomePage() {
     }, [statement, updateLocalStorageValue])
 
     return (
-        <div className='bg-slate-600 w-full'>
+        <div className='home'>
             <TransactionList transactions={statement} />
         </div>
     )

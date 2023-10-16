@@ -15,9 +15,13 @@ const statement = createSlice({
     reducers: {
         addTransaction: (state, action: PayloadAction<TransactionModel>): any => {
             state.push(action.payload);
+        },
+        deleteTransaction: (state: TransactionModel[], action: PayloadAction<TransactionModel>): any => {
+            const transactionToDelete = state.findIndex(transaction => transaction.date === action.payload.date && transaction.amount === action.payload.amount && transaction.type === action.payload.type);
+            state.splice(transactionToDelete, 1);
         }
     }
 })
 
-export const { addTransaction } = statement.actions;
+export const { addTransaction, deleteTransaction } = statement.actions;
 export default statement.reducer;

@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react'
 import { TransactionModel } from '../../model/transaction';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from '../../store/statement';
+import descriptionList from '../../utils/description';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -10,38 +11,43 @@ function classNames(...classes: string[]) {
 export default function Transaction() {
 
     const dispatch = useDispatch();
-
     const [, setTransaction] = useState<TransactionModel>();
-    const [transactionType, setTransactionType] = useState<string>('Income');
     const [amount, setAmount] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
+    const [description, setDescription] = useState<string>(descriptionList[0].descriptionText);
+    const [classification, setClassification] = useState<string>(descriptionList[0].type);
 
+
+    const handleDescription = (desc: string) => {
+        const classify = descriptionList.filter(d => d.descriptionText === desc);
+        if (classify) {
+            setClassification(classify[0].type);
+            setDescription(classify[0].descriptionText);
+        }
+    }
+ 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const classify = descriptionList.filter(d => d.descriptionText === description);
+        if (classify) {
+            setClassification(classify[0].type);
+        }
         const currentTransaction: TransactionModel = {
             amount: parseInt(amount),
             date: new Date().toLocaleString(),
             description: description,
-            type: transactionType
+            classification: classification,
+            type: parseInt(amount) > 0 ? "Income" : "Expense"
         };
+        console.log(currentTransaction);
         setTransaction(currentTransaction);
         dispatch(addTransaction(currentTransaction));
         setAmount("");
         setDescription("");
-    }
-
+        setClassification("");
+    };
+    
     return (
-        <form onSubmit={(event) => handleSubmit(event)} className="w-2/3 px-20 flex flex-row m-2 justify-around">
-            <div className='mt-auto'>
-                <select onChange={(e) => { e.preventDefault(); setTransactionType(e.target.value) }} className={transactionType === "Income" ?
-                    classNames("bg-green-500", "p-2.5 border rounded-md appearance-none") :
-                    classNames("bg-red-500", "p-2.5 border rounded-md appearance-none")
-                }>
-                    <option className='bg-green-500 hover:bg-green-500' value="Income">Income</option>
-                    <option className='bg-red-500 hover:bg-red-500' value="Expense">Expense</option>
-                </select>
-            </div>
-
+        <form onSubmit={(event) => handleSubmit(event)} className="w-2/3 px-25 flex flex-row m-3 justify-around">
             <div>
                 <label className="block text-sm leading-6 text-white font-semibold">
                     Price
@@ -51,13 +57,13 @@ export default function Transaction() {
                         <span className="text-gray-500 sm:text-sm">₹</span>
                     </div>
                     <input
-                        type="text"
+                        type="number"
                         required
-                        pattern='\d+'
+                        pattern='\-d+'
                         name="price"
                         id="price"
                         value={amount}
-                        className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block w-full text-white rounded-md border-0 py-1.5 pl-7 pr-20 sm:text-sm sm:leading-6"
                         placeholder="0.00"
                         onChange={(e) => { e.preventDefault(); setAmount(e.target.value) }}
                     />
@@ -69,18 +75,11 @@ export default function Transaction() {
                     Description
                 </label>
                 <div className="relative rounded-md shadow-sm">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span className="text-gray-500 sm:text-sm">💰</span>
-                    </div>
-                    <input
-                        type="text"
-                        name="price"
-                        id="price"
-                        value={description}
-                        className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="  Description"
-                        onChange={(e) => { e.preventDefault(); setDescription(e.target.value) }}
-                    />
+                    <select onChange={(e) => { handleDescription(e.target.value) }} className="block w-full rounded-md text-white border-0 py-1.5 pl-7 pr-20 sm:text-sm sm:leading-6">
+                        {descriptionList.map((d, index: number) => {
+                           return <option key={index} value={d.descriptionText}>{d.descriptionText}</option>
+                        })}
+                    </select>
                 </div>
             </div>
 
