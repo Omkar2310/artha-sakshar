@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
 import { TransactionModel } from "../../model/transaction";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Plugin } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -27,8 +28,9 @@ export default function Analyze() {
     ],
   };
 
-  const plugins = [{
-    beforeDraw: function (chart) {
+  const plugins: Plugin<"doughnut", any>[] = [{
+    id: '',
+    beforeDraw: function (chart: any) {
       const width = chart.width,
         height = chart.height,
         ctx = chart.ctx;

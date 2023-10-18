@@ -4,10 +4,6 @@ import { useDispatch } from 'react-redux';
 import { addTransaction } from '../../store/statement';
 import descriptionList from '../../utils/description';
 
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-}
-
 export default function Transaction() {
 
     const dispatch = useDispatch();
@@ -24,7 +20,7 @@ export default function Transaction() {
             setDescription(classify[0].descriptionText);
         }
     }
- 
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const classify = descriptionList.filter(d => d.descriptionText === description);
@@ -45,7 +41,7 @@ export default function Transaction() {
         setDescription("");
         setClassification("");
     };
-    
+
     return (
         <form onSubmit={(event) => handleSubmit(event)} className="w-2/3 px-25 flex flex-row m-3 justify-around">
             <div>
@@ -77,7 +73,7 @@ export default function Transaction() {
                 <div className="relative rounded-md shadow-sm">
                     <select onChange={(e) => { handleDescription(e.target.value) }} className="block w-full rounded-md text-white border-0 py-1.5 pl-7 pr-20 sm:text-sm sm:leading-6">
                         {descriptionList.map((d, index: number) => {
-                           return <option key={index} value={d.descriptionText}>{d.descriptionText}</option>
+                            return <option key={index} value={d.descriptionText}>{d.descriptionText}</option>
                         })}
                     </select>
                 </div>

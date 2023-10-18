@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { TransactionModel } from '../../model/transaction';
 import Transaction from '../Transaction/Transaction';
 import { useDispatch } from 'react-redux';
