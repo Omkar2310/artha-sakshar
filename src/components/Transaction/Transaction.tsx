@@ -43,14 +43,14 @@ export default function Transaction() {
     };
 
     return (
-        <form onSubmit={(event) => handleSubmit(event)} className="w-2/3 px-25 flex flex-row m-3 justify-around">
+        <form onSubmit={(event) => handleSubmit(event)} className="w-12/12 flex flex-row align-middle justify-evenly">
             <div>
                 <label className="block text-sm leading-6 text-white font-semibold">
                     Price
                 </label>
                 <div className="relative rounded-md shadow-sm">
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <span className="text-gray-500 sm:text-sm">₹</span>
+                        <span className="text-gray-500 font-bold sm:text-sm">₹</span>
                     </div>
                     <input
                         type="number"
@@ -59,7 +59,7 @@ export default function Transaction() {
                         name="price"
                         id="price"
                         value={amount}
-                        className="block w-full text-white rounded-md border-0 py-1.5 pl-7 pr-20 sm:text-sm sm:leading-6"
+                        className="block w-full text-black rounded-md border-0 py-1.5 pl-7 pr-20 sm:text-sm sm:leading-6"
                         placeholder="0.00"
                         onChange={(e) => { e.preventDefault(); setAmount(e.target.value) }}
                     />
@@ -71,9 +71,9 @@ export default function Transaction() {
                     Description
                 </label>
                 <div className="relative rounded-md shadow-sm">
-                    <select onChange={(e) => { handleDescription(e.target.value) }} className="block w-full rounded-md text-white border-0 py-1.5 pl-7 pr-20 sm:text-sm sm:leading-6">
+                    <select onChange={(e) => { handleDescription(e.target.value) }} className="block w-full rounded-md text-black border-0 py-1.5 pl-7 pr-20 sm:text-sm sm:leading-6">
                         {descriptionList.map((d, index: number) => {
-                            return <option key={index} value={d.descriptionText}>{d.descriptionText}</option>
+                            return <option className='text-black' key={index} value={d.descriptionText}>{d.descriptionText}</option>
                         })}
                     </select>
                 </div>

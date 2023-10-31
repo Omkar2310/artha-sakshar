@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
-const navigation: any[] = [
-    { name: 'Home', href: '/', current: false },
-    { name: 'Analyze', href: '/analyze', current: false },
-    { name: 'Settings', href: '/settings', current: false },
+const navigation = [
+    { name: 'HomePage', href: '/', current: false },
+    { name: 'Transactions', href: '/transactions', current: false },
+    { name: 'Analyze', href: '/analyze', current: false }
 ]
 
 function classNames(...classes: string[]) {
@@ -15,7 +14,7 @@ function classNames(...classes: string[]) {
 
 export default function NavBar() {
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-700">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -42,7 +41,7 @@ export default function NavBar() {
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
-                                        {navigation.map((item: any) => (
+                                        {navigation.map((item) => (
                                             <a
                                                 key={item.name}
                                                 href={item.href}

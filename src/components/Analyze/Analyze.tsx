@@ -59,7 +59,7 @@ export default function Analyze() {
   }, [statement])
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center bg-gray-800">
       {groupChartData && groupChartData.length ?
         <Doughnut className="h-2/3 w-2/3" data={chartData} plugins={plugins}
           options={{

@@ -4,6 +4,7 @@ import TransactionList from '../TransactionList/TransactionList';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { TransactionModel } from '../../model/transaction';
 import { useEffect } from 'react';
+import Transaction from '../Transaction/Transaction';
 
 export default function HomePage() {
     const statement = useSelector((state: any) => state.statement);
@@ -15,7 +16,8 @@ export default function HomePage() {
     }, [statement, updateLocalStorageValue])
 
     return (
-        <div className='home'>
+        <div className='flex flex-col bg-gray-800'>
+            <Transaction />
             <TransactionList transactions={statement} />
         </div>
     )
