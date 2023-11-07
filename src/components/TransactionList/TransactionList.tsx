@@ -7,6 +7,7 @@ import useLocalStorage from '../hooks/useLocalStorage';
 
 interface TransactionListProps {
   transactions: TransactionModel[];
+  filter?: boolean;
 }
 
 const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
@@ -19,16 +20,28 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
     dispatch(deleteTransaction(transaction));
   }
 
+  // if(filter) {
+  //   transactions = transactions.filter(trans => {
+  //     console.log(parseInt(trans.date.split(',')[0].split('/')[1])-1);
+  //     parseInt(trans.date.split(',')[0].split('/')[1])-1 === new Date().getMonth();
+  //   })
+  // }
+
   useEffect(() => {
+    // if(filter) {
+      // transactions = transactions.filter(trans => {
+      //   parseInt(trans.date.split(',')[0].split('/')[1])-1 === new Date().getMonth();
+      // })
+    // }
     updateLocalStorageValue(transactions);
   }, [transactions, updateLocalStorageValue])
 
 
   return (
-    <div className='flex flex-col items-center bg-gray-800'>
+    <div className='flex flex-col h-3/4 overflow-auto items-center bg-gray-800'>
       {/* <Transaction /> */}
-      <h2 className="text-2xl font-semibold mb-4">Recent Transaction History</h2>
-      <div className="p-4 w-1/2 h-1/2 overflow-auto">
+      {/* <h2 className="text-2xl font-semibold mb-4">Recent Transaction History</h2> */}
+      <div className="p-4 w-1/2">
         <ul className='border-white rounded-2xl'>
           {transactions.map((transaction: TransactionModel) => (
             <li key={transaction.date} className="rounded-2xl mb-2">

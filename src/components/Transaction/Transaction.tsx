@@ -38,7 +38,6 @@ export default function Transaction() {
         setTransaction(currentTransaction);
         dispatch(addTransaction(currentTransaction));
         setAmount("");
-        setDescription("");
         setClassification("");
     };
 

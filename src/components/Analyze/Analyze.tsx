@@ -36,7 +36,7 @@ export default function Analyze() {
         ctx = chart.ctx;
       ctx.restore();
       const fontSize = (height / 160).toFixed(2);
-      ctx.font = fontSize + "em sans-serif";
+      ctx.font = fontSize;
       ctx.fillStyle = "white";
       ctx.textBaseline = "top";
       const text = `${income}`,

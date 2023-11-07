@@ -1,18 +1,20 @@
-*{
-    /* background-color: #6786e6; */
-    color: white;
-    /* flood-color: white; */
-  }
+* {
   
-  
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  /* Firefox */
-  input[type=number] {
-    -moz-appearance: textfield;
-  }
-  
+  color: white;
+}
+
+@font-face {
+  font-family: "virgil";
+  src: local('MyFont'), url(./fonts/virgil.woff2) format('woff2');
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
